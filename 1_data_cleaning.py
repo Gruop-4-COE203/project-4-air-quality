@@ -1,4 +1,4 @@
-#Data Collection and Cleaning
+#Data Cleaning
 #Istanbul Air Quality Project
 
 #This file is collecting and cleaning the dataset
