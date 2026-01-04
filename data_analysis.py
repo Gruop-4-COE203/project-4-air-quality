@@ -3,7 +3,10 @@ import numpy as np
 
 df=pd.read_csv("data/istanbul_air_quality_clean.csv")
 
+#Convert date strings into datetime format for time-based analysis
 df["date"]=pd.to_datetime(df["date"])
+
+#Add a city column with a constant value
 df["city"]="Istanbul"
 print("Dataset loaded successfully.")
 print("Dataset shape:",df.shape)
@@ -11,12 +14,16 @@ print("\n----Air Quality of Istanbul----")
 print(df.head())
 
 print("\n----All Numerical Values ​​of PM2.5 and PM10----")
-#This shows count, mean, std, min and max values for air pollution:
+#This shows count, mean,min and max values for air pollution
 print(df[["pm25","pm10"]].describe())
 
 print("\n----DataFrame Info----")
-#This shows the number of entries, column names, non-null counts, and data types:
+#This shows the number of entries, column names, non-null counts, and data types
 print(df.info())
+
+
+#Calculate mean,min and max values for PM2.5 and PM10
+#PM2.5 and PM10 are particulate matter indicators used to assess air pollution levels
 
 #Calculations
 print("\n----Calculations of PM2.5 and PM10---")
@@ -38,13 +45,18 @@ print("Maximum value of PM10 (most polluted day):",pm10_max)
 print("Minimum value of PM10 (cleanest day):",pm10_min)
 
 
-#Since PM10 data is more variable than PM2.5, the average alone is not sufficient.
-print("\n----PM10 Summary----")
+#Since PM10 is more variable, more detailed statistical analysis is performed
+#and the data is divided into parts for visualization purposes.
 print(df["pm10"].describe())
 
+#Since PM10 values show higher variability,segments are created to better analyze
+#the data distribution.Quartiles lower_part,median_part,upper_part) and the 
+#interquartile range (IQR) are calculated.
 lower_part=df["pm10"].quantile(0.25)
 median_part=df["pm10"].quantile(0.50)
 upper_part=df["pm10"].quantile(0.75)
+
+#IQR provides a robust measure of variability that is less affected by outliers than the mean
 IQR=upper_part-lower_part
 
 print("\n----PM10 Parts & Spread----")
