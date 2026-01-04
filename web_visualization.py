@@ -13,7 +13,7 @@ fig=px.line(
     df,
     x="date",
     y=["pm25","pm10"],
-    title="PM2.5 & PM10 Levels in Istanbul",
+    title="PM2.5 & PM10 Levels by Date in Istanbul(2024)",
     labels={
         "date":"Date",
         "value":"Pollution Level",
