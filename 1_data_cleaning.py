@@ -24,12 +24,15 @@ raw_data = {
 df_raw = pd.DataFrame(raw_data)
 
 #Save raw data
-df_raw.to_csv("data/istanbul_air_quality.csv", index=False)
+df_raw.to_csv("data/istanbul_air_quality_raw.csv", index=False)
 
 print("Raw dataset created.")
+print("Raw Data before cleaning:")
+print(df_raw)
 
 #Data cleaning
 df = df_raw.copy()
+print("Before cleaning:",df.shape)
 
 #Remove lines that do not contain date information
 df = df.dropna(subset=["date"])
@@ -46,10 +49,11 @@ df = df[(df["pm25"] < 300) & (df["pm10"] < 300)]
 
 #Reset the directory after cleaning
 df.reset_index(drop=True, inplace=True)
-
+print("\nAfter cleaning:",df.shape)
 #Save cleaned data
-df.to_csv("data/istanbul_air_quality.csv", index=False)
+df.to_csv("data/istanbul_air_quality_clean.csv", index=False)
 print("Cleaned dataset saved.")
-print(df)
+print("Cleaned Data Preview:")
+print(df.head())
 
 
