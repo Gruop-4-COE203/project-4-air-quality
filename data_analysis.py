@@ -1,10 +1,26 @@
 import pandas as pd
 import numpy as np
 
-df=pd.read_csv("data/istanbul_air_quality_clean.csv")
+try:
+    df = pd.read_csv("data/istanbul_air_quality_clean.csv")
+except FileNotFoundError:
+    raise FileNotFoundError("Clean dataset not found: data/istanbul_air_quality_clean.csv")
+except pd.errors.EmptyDataError:
+    raise ValueError("Clean dataset is empty.")
+except Exception as e:
+    raise RuntimeError(f"Unexpected error while loading dataset: {e}")
 
-#Convert date strings into datetime format for time-based analysis
-df["date"]=pd.to_datetime(df["date"])
+try:
+    df["date"] = pd.to_datetime(df["date"])
+except KeyError:
+    raise KeyError("Column 'date' not found in dataset.")
+except Exception as e:
+    raise ValueError(f"Date conversion failed: {e}")
+
+required_columns = ["pm25", "pm10"]
+for col in required_columns:
+    if col not in df.columns:
+        raise ValueError(f"Required column '{col}' is missing from dataset.")
 
 #Add a city column with a constant value
 df["city"]="Istanbul"
@@ -50,7 +66,7 @@ print("Minimum value of PM10 (cleanest day):",pm10_min)
 print(df["pm10"].describe())
 
 #Since PM10 values show higher variability,segments are created to better analyze
-#the data distribution.Quartiles lower_part,median_part,upper_part) and the 
+#the data distribution.Quartiles lower_part,median_part,upper_part) and the
 #interquartile range (IQR) are calculated.
 lower_part=df["pm10"].quantile(0.25)
 median_part=df["pm10"].quantile(0.50)
@@ -66,4 +82,3 @@ print(f"Upper Part of PM10:{upper_part}")
 print(f"IQR (Interquartile Range/middle %50 spread):{IQR}")
 
 print("\nData analysis completed.")
-
