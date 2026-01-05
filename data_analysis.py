@@ -74,11 +74,10 @@ upper_part=df["pm10"].quantile(0.75)
 
 #IQR provides a robust measure of variability that is less affected by outliers than the mean
 IQR=upper_part-lower_part
-
 print("\n----PM10 Parts & Spread----")
 print(f"Lower Part of PM10:{lower_part}")
 print(f"Median Part of PM10 (median value):{median_part}")
 print(f"Upper Part of PM10:{upper_part}")
 print(f"IQR (Interquartile Range/middle %50 spread):{IQR}")
-
 print("\nData analysis completed.")
+
