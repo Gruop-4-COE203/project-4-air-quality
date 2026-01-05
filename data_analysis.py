@@ -1,21 +1,21 @@
+"""Data Analysis"""
 import pandas as pd
-import numpy as np
 
 try:
     df = pd.read_csv("data/istanbul_air_quality_clean.csv")
-except FileNotFoundError:
-    raise FileNotFoundError("Clean dataset not found: data/istanbul_air_quality_clean.csv")
-except pd.errors.EmptyDataError:
-    raise ValueError("Clean dataset is empty.")
-except Exception as e:
-    raise RuntimeError(f"Unexpected error while loading dataset: {e}")
+except FileNotFoundError as exc:
+    raise FileNotFoundError("Clean dataset not found: data/istanbul_air_quality_clean.csv") from exc
+except pd.errors.EmptyDataError as exc:
+    raise ValueError("Clean dataset is empty.") from exc
+except Exception as exc:
+    raise RuntimeError(f"Unexpected error while loading dataset: {exc}") from exc
 
 try:
     df["date"] = pd.to_datetime(df["date"])
-except KeyError:
-    raise KeyError("Column 'date' not found in dataset.")
-except Exception as e:
-    raise ValueError(f"Date conversion failed: {e}")
+except KeyError as exc:
+    raise KeyError("Column 'date' not found in dataset.") from exc
+except Exception as exc:
+    raise ValueError(f"Date conversion failed: {exc}") from exc
 
 required_columns = ["pm25", "pm10"]
 for col in required_columns:
@@ -29,7 +29,7 @@ print("Dataset shape:",df.shape)
 print("\n----Air Quality of Istanbul----")
 print(df.head())
 
-print("\n----All Numerical Values ​​of PM2.5 and PM10----")
+print("\n----All Numerical Values of PM2.5 and PM10----")
 #This shows count, mean,min and max values for air pollution
 print(df[["pm25","pm10"]].describe())
 
@@ -43,7 +43,8 @@ print(df.info())
 
 #Calculations
 print("\n----Calculations of PM2.5 and PM10---")
-print("These calculations summarize the average, maximum, and minimum daily air pollution levels in Istanbul.\n")
+print("These calculations summarize the average, maximum, and minimum"
+      " daily air pollution levels in Istanbul.\n")
 
 pm25_mean = df["pm25"].mean()
 pm25_max = df["pm25"].max()
@@ -80,4 +81,3 @@ print(f"Median Part of PM10 (median value):{median_part}")
 print(f"Upper Part of PM10:{upper_part}")
 print(f"IQR (Interquartile Range/middle %50 spread):{IQR}")
 print("\nData analysis completed.")
-

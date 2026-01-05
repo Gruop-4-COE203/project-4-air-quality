@@ -1,4 +1,4 @@
-#Data Collection
+"""Data Collection """
 #Istanbul Air Quality Project
 #This file collects raw air quality data
 
@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 #Air quality web page
-url = "https://www.iqair.com/turkey/istanbul/istanbul"
-response = requests.get(url)
+URL = "https://www.iqair.com/turkey/istanbul/istanbul"
+response = requests.get(URL, timeout=5)
 soup = BeautifulSoup(response.text, "html.parser")
 
 #A raw dataset is created

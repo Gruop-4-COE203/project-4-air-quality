@@ -1,3 +1,5 @@
+"""Data Visualization"""
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -53,10 +55,8 @@ plt.title("PM2.5 & PM10 Levels by Date in Istanbul(2024)")
 plt.xlabel("Date")
 plt.ylabel("Air Pollution")
 plt.xticks(rotation=45)
-plt.legend() 
+plt.legend()
 plt.tight_layout()
 plt.show()
 
 print("All visualizations are done.")
-
-

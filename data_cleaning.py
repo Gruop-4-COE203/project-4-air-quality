@@ -1,4 +1,4 @@
-#Data Cleaning
+""" Data cleaning """
 #Istanbul Air Quality Project
 
 #This file is collecting and cleaning the dataset
@@ -7,11 +7,10 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import numpy as np
 
 #Air quality web page(data source is referenced)
-url = "https://www.iqair.com/turkey/istanbul/istanbul"
-response = requests.get(url)
+URL = "https://www.iqair.com/turkey/istanbul/istanbul"
+response = requests.get(URL, timeout=5)
 soup = BeautifulSoup(response.text, "html.parser")
 raw_data = {
     "date": [
@@ -55,5 +54,3 @@ df.to_csv("data/istanbul_air_quality_clean.csv", index=False)
 print("Cleaned dataset saved.")
 print("Cleaned Data Preview:")
 print(df.head())
-
-

@@ -1,3 +1,5 @@
+"""Web visualization"""
+
 import pandas as pd
 import plotly.express as px
 
@@ -8,7 +10,8 @@ df["date"]=pd.to_datetime(df["date"])
 print("Dataset is loaded ready for web visualization.")
 print(df.head())
 
-# This creates a web-based line chart that allows comparison of PM2.5 and PM10 values on the same graph.
+#" This creates a web-based line chart that allows,
+#comparison of PM2.5 and PM10 values on the same graph.
 fig=px.line(
     df,
     x="date",
@@ -22,5 +25,4 @@ fig=px.line(
 )
 
 fig.show()
-
 print("Web visualization is done.")
