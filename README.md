@@ -57,7 +57,21 @@ project-4-air-quality/
 │
 ├── data/
 │   ├── istanbul_air_quality_raw.csv
-│   └── istanbul_air_quality_clean.csv
+│   ├── istanbul_air_quality_clean.csv
+│   └── istanbul_air_quality.csv
+│
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
+│
+├── tests/
+│   └── py_tests.py
 │
 ├── data_collection.py
 ├── data_cleaning.py
@@ -65,8 +79,7 @@ project-4-air-quality/
 ├── data_visualization.py
 ├── web_visualization.py
 │
-├── test/
-│   └── test_data_pipeline.py
+├── requirements.txt
 └── README.md
 ```
 
@@ -109,10 +122,14 @@ istanbul_air_quality_raw.csv
 ### 🧹 2. Data Cleaning
 **File:** `data_cleaning.py`
 
-- Removes invalid records
-- Converts date values safely
-- Fills missing pollution values
-- Produces a clean dataset ready for analysis
+- Loads the raw dataset generated in the data collection step
+- Validates column names and expected schema
+- Removes rows with invalid or missing date values
+- Converts date strings into proper datetime objects
+- Handles missing PM2.5 and PM10 values using safe numerical checks
+- Removes or corrects non-numeric pollution values
+- Ensures the dataset is non-empty after cleaning
+- Saves the fully cleaned and validated dataset for analysis
 
 📤 Output:
 ```text
@@ -219,6 +236,20 @@ python data_analysis.py
 python data_visualization.py
 python web_visualization.py
 ```
+5️⃣ Run the web-based visualization (React.js)
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+This starts the React development server and runs the interactive visualization implemented in `App.js` at:
+
+```
+http://localhost:3000
+```
+
 
 ---
 
